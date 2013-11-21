@@ -15,14 +15,15 @@
 void initRobot();
 void turnLeftWheel();
 void turnRightWheel();
-void moveForward();
-void moveBackward();
 void stopRight();
 void stopLeft();
+void moveForward(char tuneLeft, char tuneRight);
+void moveBackward(char tuneLeft, char tuneRight);
 void leftTurn();
 void rightTurn();
 void halfRight();
 void halfLeft();
+void stop();
 
 
 #endif /* ROBOTLIBRARY_H_ */
