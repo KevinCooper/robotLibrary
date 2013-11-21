@@ -48,6 +48,15 @@ void moveForward(){
 void moveBackward(){
 
 }
+void stopRight(){
+    P1DIR &= ~BIT2;
+    P1SEL &= ~BIT2;
+}
+
+void stopLeft(){
+	P2DIR &= ~BIT1;
+	P2SEL &= ~BIT1;
+}
 void leftTurn(){
 
 }
