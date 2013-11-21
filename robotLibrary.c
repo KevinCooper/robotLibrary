@@ -8,22 +8,21 @@
 #include <msp430.h>
 
 void initRobot(){
-    TA0CTL &= ~MC1|MC0;            // stop timer A0
+    TA0CTL &= ~(MC1|MC0);            // stop timer A0
     TA0CTL |= TACLR;                // clear timer A0
     TA0CTL |= TASSEL1;           // configure for SMCLK
     TA0CCR0 = 100;                // set signal period to 200 clock cycles (~100 microseconds)
-    TA0CCR1 = 1;                // set duty cycle to 50/200 (10%)
-    TA0CCTL1 |= OUTMOD_3;        // set TACCTL1 to Reset / Set mode
+    TA0CCR1 = 60;                // set duty cycle to 50/200 (10%)
+    TA0CCTL1 |= OUTMOD_7;        // set TACCTL1 to Reset / Set mode
     TA0CTL |= MC0;                // count up
 
-    TA1CTL &= ~MC1|MC0;            // stop timer A1
+    TA1CTL &= ~(MC1|MC0);            // stop timer A1
     TA1CTL |= TACLR;                // clear timer A1
     TA1CTL |= TASSEL1;           // configure for SMCLK
     TA1CCR0 = 100;                // set signal period to 100 clock cycles (~100 microseconds)
-    TA1CCR1 = 1;                // set duty cycle to 50/100 (10%)
-    TA1CCTL1 |= OUTMOD_3;        // set TA1CCTL1 to Reset / Set mode
+    TA1CCR1 = 60;                // set duty cycle to 50/100 (10%)
+    TA1CCTL1 |= OUTMOD_7;        // set TA1CCTL1 to Set / Reset mode
     TA1CTL |= MC0;                // count up
-
 }
 
 void turnLeftWheel(){
@@ -44,7 +43,7 @@ void stopLeft(){
     P1SEL &= ~BIT2;
 }
 void modTimer(int speedLeft, int speedRight){
-    TA0CTL &= ~MC1|MC0;            // stop timer A0
+    TA0CTL &= ~(MC1|MC0);            // stop timer A0
     TA0CTL |= TACLR;                // clear timer A0
     TA0CTL |= TASSEL1;           // configure for SMCLK
     TA0CCR0 = 100;                // set signal period to 200 clock cycles (~100 microseconds)
@@ -52,7 +51,7 @@ void modTimer(int speedLeft, int speedRight){
     TA0CCTL1 |= OUTMOD_3;        // set TACCTL1 to Reset / Set mode
     TA0CTL |= MC0;                // count up
 
-    TA1CTL &= ~MC1|MC0;            // stop timer A1
+    TA1CTL &= ~(MC1|MC0);            // stop timer A1
     TA1CTL |= TACLR;                // clear timer A1
     TA1CTL |= TASSEL1;           // configure for SMCLK
     TA1CCR0 = 100;                // set signal period to 100 clock cycles (~100 microseconds)
@@ -69,10 +68,14 @@ void moveForward(int tuneLeft, int tuneRight){
 	//Turn right
     P1DIR |= BIT2;
     P1SEL |= BIT2;
+	P1DIR |= BIT1;
+	P1OUT &= ~BIT1;
 
     //Turn Left
 	P2DIR |= BIT1;
 	P2SEL |= BIT1;
+	P2DIR |= BIT0;
+	P2OUT &= ~BIT0;
 }
 void moveBackward(int tuneLeft, int tuneRight){
 	stopLeft();
