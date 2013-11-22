@@ -10,22 +10,22 @@ Enables the left motor and moves it in the forward direction<br>
 Enables the right motor and moves it in the forward direction<br>
 `void turnRightWheel()`<br>
 <br>
-Enables the left motore and moves it in the backward direction<br>
+Enables the left motor and moves it in the backward direction<br>
 `void turnLeftWheelBack()`<br>
 <br>
-Enables the right motore and moves it in the backward direction<br>
+Enables the right motor and moves it in the backward direction<br>
 `void turnRightWheelBack()`<br>
 <br>
 Stops the right motor completely<br>
 `void stopRight()`<br>
 <br>
-Stops the left motore completely<br>
+Stops the left motor completely<br>
 `void stopLeft()`<br>
 <br>
 Change the PWM signal to speedLeft/100 and speedRight/100.  These values should not be set above above 60 or the motor driver chip could be damaged.  This function can be used at any time.
 `void modTimer(int speedLeft, int speedRight)`<br>
 <br>
-Move the roboto in the forward direction with the speed settings for the left and right wheel respectively.<br>
+Move the robot in the forward direction with the speed settings for the left and right wheel respectively.<br>
 `void moveForward(int tuneLeft, int tuneRight)`<br>
 <br>
 Move the robot in the backward direction with the speed settings for the left and right wheel respectively.<br>
