@@ -26,21 +26,43 @@ void initRobot(){
 }
 
 void turnLeftWheel(){
-    P1DIR |= BIT2;
-    P1SEL |= BIT2;
+    P1DIR |= BIT1;
+    P1SEL |= BIT1;
+	P1DIR |= BIT2;
+	P1OUT &= ~BIT2;
 }
 void turnRightWheel(){
+	P2DIR |= BIT0;
+	P2SEL |= BIT0;
+	P2DIR |= BIT1;
+	P2OUT &= ~BIT1;
+}
+
+void turnLeftWheelBack(){
+    P1DIR |= BIT2;
+    P1SEL |= BIT2;
+	P1DIR |= BIT1;
+	P1OUT &= ~BIT1;
+}
+void turnRightWheelBack(){
 	P2DIR |= BIT1;
 	P2SEL |= BIT1;
+	P2DIR |= BIT0;
+	P2OUT &= ~BIT0;
 }
+
 void stopRight(){
-	P2DIR &= ~BIT1;
-	P2SEL &= ~BIT1;
+	P2DIR &= ~(BIT1|BIT0);
+	P2SEL &= ~(BIT1|BIT0);
+	P2DIR |= (BIT0|BIT1);
+	P2OUT &= ~(BIT0|BIT1);
 }
 
 void stopLeft(){
-    P1DIR &= ~BIT2;
-    P1SEL &= ~BIT2;
+    P1DIR &= ~(BIT2|BIT1);
+    P1SEL &= ~(BIT2|BIT1);
+	P1DIR |= (BIT1|BIT2);
+	P1OUT &= ~(BIT1|BIT2);
 }
 void modTimer(int speedLeft, int speedRight){
     TA0CTL &= ~(MC1|MC0);            // stop timer A0
@@ -65,31 +87,15 @@ void moveForward(int tuneLeft, int tuneRight){
 	stopRight();
 
 	modTimer(tuneLeft, tuneRight);
-	//Turn right
-    P1DIR |= BIT2;
-    P1SEL |= BIT2;
-	P1DIR |= BIT1;
-	P1OUT &= ~BIT1;
 
-    //Turn Left
-	P2DIR |= BIT1;
-	P2SEL |= BIT1;
-	P2DIR |= BIT0;
-	P2OUT &= ~BIT0;
+
 }
 void moveBackward(int tuneLeft, int tuneRight){
 	stopLeft();
 	stopRight();
-	TA0CCR1 = 10 * tuneLeft;
-	TA1CCR1 = 10 * tuneRight;
-
-	//Turn right
-    P1DIR |= BIT3;
-    P1SEL |= BIT3;
-
-    //Turn Left
-	P2DIR |= BIT0;
-	P2SEL |= BIT0;
+	modTimer(tuneLeft, tuneRight);
+	turnLeftWheelBack();
+	turnRightWheelBack();
 }
 void leftTurn(){
 

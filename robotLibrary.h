@@ -15,6 +15,8 @@
 void initRobot();
 void turnLeftWheel();
 void turnRightWheel();
+void turnLeftWheelBack();
+void turnRightWheelBack();
 void stopRight();
 void stopLeft();
 void modTimer(int speedLeft, int speedRight);
