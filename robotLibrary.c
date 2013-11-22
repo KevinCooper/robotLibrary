@@ -13,6 +13,7 @@ void initRobot(){
     TA0CTL |= TASSEL1;           // configure for SMCLK
     TA0CCR0 = 100;                // set signal period to 200 clock cycles (~100 microseconds)
     TA0CCR1 = 60;                // set duty cycle to 50/200 (10%)
+    TA0CCTL0 |= OUTMOD_7;		// CCTL0 set/reset
     TA0CCTL1 |= OUTMOD_7;        // set TACCTL1 to Reset / Set mode
     TA0CTL |= MC0;                // count up
 
@@ -21,6 +22,7 @@ void initRobot(){
     TA1CTL |= TASSEL1;           // configure for SMCLK
     TA1CCR0 = 100;                // set signal period to 100 clock cycles (~100 microseconds)
     TA1CCR1 = 60;                // set duty cycle to 50/100 (10%)
+    TA1CCTL0 |= OUTMOD_7;		//CCTL0 set/reset
     TA1CCTL1 |= OUTMOD_7;        // set TA1CCTL1 to Set / Reset mode
     TA1CTL |= MC0;                // count up
 }
@@ -70,7 +72,8 @@ void modTimer(int speedLeft, int speedRight){
     TA0CTL |= TASSEL1;           // configure for SMCLK
     TA0CCR0 = 100;                // set signal period to 200 clock cycles (~100 microseconds)
     TA0CCR1 = speedLeft;                // set duty cycle to 50/200 (10%)
-    TA0CCTL1 |= OUTMOD_3;        // set TACCTL1 to Reset / Set mode
+    TA0CCTL1 |= OUTMOD_7;        // set TACCTL1 to Reset / Set mode
+    TA0CCTL0 |= OUTMOD_7;		//CCTL0 set/reset
     TA0CTL |= MC0;                // count up
 
     TA1CTL &= ~(MC1|MC0);            // stop timer A1
@@ -78,7 +81,8 @@ void modTimer(int speedLeft, int speedRight){
     TA1CTL |= TASSEL1;           // configure for SMCLK
     TA1CCR0 = 100;                // set signal period to 100 clock cycles (~100 microseconds)
     TA1CCR1 = speedRight;                // set duty cycle to 50/100 (10%)
-    TA1CCTL1 |= OUTMOD_3;        // set TA1CCTL1 to Reset / Set mode
+    TA1CCTL0 |= OUTMOD_7;		//CCTL0 set/reset
+    TA1CCTL1 |= OUTMOD_7;        // set TA1CCTL1 to Reset / Set mode
     TA1CTL |= MC0;                // count up
 }
 void moveForward(int tuneLeft, int tuneRight){
